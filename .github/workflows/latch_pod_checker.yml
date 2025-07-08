@@ -21,6 +21,7 @@ jobs:
         run: |
           pip install requests
 
+
       - name: Configure SSH and run script
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -33,4 +34,10 @@ jobs:
           echo -e "Host latch-pod\n  HostName 172.20.203.63\n  User root\n  ProxyJump root@a1fd7b5d7b5824b46b8671207e1124b6-610912349.us-west-2.elb.amazonaws.com" >> ~/.ssh/config
           ssh-keyscan -H 172.20.203.63 >> ~/.ssh/known_hosts
           ssh-keyscan -H a1fd7b5d7b5824b46b8671207e1124b6-610912349.us-west-2.elb.amazonaws.com >> ~/.ssh/known_hosts
+
+          echo "[INFO] Testing SSH connection..."
+          ssh -vvv latch-pod echo ok
+
+          echo "[INFO] Running pod check script..."
           python check_latch_pod.py
+
