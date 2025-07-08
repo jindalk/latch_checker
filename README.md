@@ -1,2 +1,2 @@
 # latch_checker
-This checks if latch pod is running every night
+Runs every night to check if latch pod is still running
